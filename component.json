@@ -1,0 +1,11 @@
+{
+  "name": "songlocator-exfm",
+  "version": "0.1.0",
+  "description": "SongLocator resolver for exfm",
+  "tags": ["songlocator", "api", "music", "streaming", "audio", "resolver", "exfm"],
+  "author": "Andrey Popp <8mayday@gmail.com>",
+  "main": ["./songlocator-exfm.js"],
+  "dependencies": {
+    "songlocator-base": "~0.1.1"
+  }
+}
