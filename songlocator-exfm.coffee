@@ -40,7 +40,8 @@
 
           results = for song in response.songs
             # use soundcloud instead
-            continue if song.url.indexOf("http:#api.soundcloud") == 0
+            continue if song.url.indexOf("http://api.soundcloud.com") == 0
+            continue if song.url.indexOf("https://api.soundcloud.com") == 0
             continue unless song.artist
 
             if song.title?

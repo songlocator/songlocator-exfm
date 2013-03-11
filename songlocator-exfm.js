@@ -69,7 +69,10 @@ var __hasProp = {}.hasOwnProperty,
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               song = _ref[_i];
-              if (song.url.indexOf("http:#api.soundcloud") === 0) {
+              if (song.url.indexOf("http://api.soundcloud.com") === 0) {
+                continue;
+              }
+              if (song.url.indexOf("https://api.soundcloud.com") === 0) {
                 continue;
               }
               if (!song.artist) {
