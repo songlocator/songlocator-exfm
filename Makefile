@@ -3,6 +3,9 @@ LIB = $(SRC:%.coffee=%.js)
 
 all: $(LIB)
 
+watch:
+	watch -n0.3 $(MAKE) all
+
 clean:
 	rm -f $(LIB)
 
