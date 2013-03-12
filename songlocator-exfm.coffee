@@ -29,11 +29,12 @@
     options: extend({}, BaseResolver::options, {searchMaxResults: 11})
 
     resolve: (qid, track, artist, album, search = false) ->
+      query = "#{track or ''} #{artist or ''}".trim()
       this.request
-        url: "http://ex.fm/api/v3/song/search/#{encodeURIComponent(track)}"
+        url: "http://ex.fm/api/v3/song/search/#{encodeURIComponent(query)}"
         params:
           start: 0,
-          results: if not search then 1 else this.options.searchMaxResults
+          results: this.options.searchMaxResults
         callback: (error, response) =>
           return if error
           return unless response.results > 0
@@ -69,6 +70,7 @@
               else if dTitle.toLowerCase().indexOf(song.artist.toLowerCase()) == 0
                 dTitle = dTitle.slice(song.artist.length).trim()
 
+
             continue if not (
               dTitle.toLowerCase().indexOf(track.toLowerCase()) != -1 \
               and (search or song.artist.toLowerCase().indexOf((artist or '').toLowerCase()) != -1) \
@@ -90,7 +92,7 @@
               mimetype: "audio/mpeg"
               duration: undefined
 
-          this.results(qid, if not search then results[0] else results)
+          this.results(qid, if not search then [results[0]] else results)
 
     search: (qid, searchString) ->
       this.resolve(qid, searchString, undefined, undefined, true)

@@ -45,15 +45,17 @@ var __hasProp = {}.hasOwnProperty,
     });
 
     Resolver.prototype.resolve = function(qid, track, artist, album, search) {
-      var _this = this;
+      var query,
+        _this = this;
       if (search == null) {
         search = false;
       }
+      query = ("" + (track || '') + " " + (artist || '')).trim();
       return this.request({
-        url: "http://ex.fm/api/v3/song/search/" + (encodeURIComponent(track)),
+        url: "http://ex.fm/api/v3/song/search/" + (encodeURIComponent(query)),
         params: {
           start: 0,
-          results: !search ? 1 : this.options.searchMaxResults
+          results: this.options.searchMaxResults
         },
         callback: function(error, response) {
           var dTitle, result, results, song;
@@ -112,7 +114,7 @@ var __hasProp = {}.hasOwnProperty,
             }
             return _results;
           }).call(_this);
-          return _this.results(qid, !search ? results[0] : results);
+          return _this.results(qid, !search ? [results[0]] : results);
         }
       });
     };
